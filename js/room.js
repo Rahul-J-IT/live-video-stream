@@ -74,3 +74,68 @@ let hideDisplayFrame = () => {
 }
 
 displayFrame.addEventListener('click', hideDisplayFrame)
+
+// Function to get URL parameters
+function getQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        room: params.get('room'),
+    };
+}
+
+// Get room parameters
+// const { room } = getQueryParams();
+
+// // Check if running locally or hosted
+// const baseUrl = window.location.origin + window.location.pathname;
+
+// // Construct full URL
+// const fullUrl = `${baseUrl}?room=${room}`;
+
+// // Display the URL
+// document.getElementById('room-url').textContent = fullUrl;
+
+//----------------------------------
+
+// JavaScript for sharing room functionality
+const { room } = getQueryParams();
+
+// Check if running locally or hosted
+const baseUrl = window.location.origin + window.location.pathname;
+
+// Construct full URL
+const fullUrl = `${baseUrl}?room=${room}`;
+
+// Function to copy the URL
+document.getElementById('room-link-button').addEventListener('click', function() {
+    navigator.clipboard.writeText(fullUrl).then(() => {
+        alert('Room link copied to clipboard!'); // Optional feedback to the user
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+});
+
+// Function to get URL parameters
+function getQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        room: params.get('room') // Assuming 'room' contains the password
+    };
+}
+
+// Get room parameter (which contains the password)
+
+
+// Add event listener for the password button
+document.getElementById('password-button').addEventListener('click', function() {
+    if (room) {
+        navigator.clipboard.writeText(room).then(() => {
+            alert('Password copied to clipboard!'); // Feedback to the user
+        }).catch(err => {
+            console.error('Failed to copy password: ', err);
+        });
+    } else {
+        alert('No password available to copy.');
+    }
+});
+
